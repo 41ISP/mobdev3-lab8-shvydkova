@@ -10,6 +10,7 @@ async function fetchData() {
         tracks.classList.add("track-item");
         const song = res2[i].track
         const ListArt = song.artists
+        const ListImg = song.album.images
 
         const number = document.createElement("div")
         number.classList.add("track-number")
@@ -25,8 +26,14 @@ async function fetchData() {
         const authorSongs = document.createElement("div")
         const authorNames = ListArt.map(artist => artist.name)
         authorSongs.textContent = authorNames
+
         const albumSongs = document.createElement("div")
         albumSongs.textContent = song.album.name
+
+        const imageSongs = document.createElement("img")
+        imageSongs.classList.add("album-art")
+        const imgTrack = ListImg.map(image => image.url)
+        imageSongs.src = imgTrack[0]
 
         const durationSongs = document.createElement("div")
         durationSongs.classList.add("track-meta");
@@ -44,6 +51,7 @@ async function fetchData() {
         infoSong.appendChild(nameSongs)
         infoSong.appendChild(authorSongs)
         infoSong.appendChild(albumSongs)
+        mainSong.appendChild(imageSongs)
         mainSong.appendChild(infoSong)
         tracks.appendChild(number)
         tracks.appendChild(mainSong)
@@ -52,13 +60,14 @@ async function fetchData() {
         runtime += time;
     }
     console.log(runtime)
+    const durSongs = document.createElement("h5")
+    durSongs.classList.add("total-duration")
+
     const hours = Math.floor(runtime / 3600000)
     const minutes = Math.floor((runtime % 3600000) / 100000)
-    const string = document.createElement("div")
-    string.classList.add("stat")
-    string.textContent = "Треков: " + res2.length
-        + "  Общая длительность: " + hours + " ч " + minutes + " мин "
-    statesContaner.appendChild(string);
+    durSongs.textContent = "Треков: " + res2.length +" Общая длительность: " + hours + " ч " + minutes + " мин "
+
+    statesContaner.appendChild(durSongs)
 
 }
 fetchData()
