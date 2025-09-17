@@ -10,7 +10,6 @@ async function fetchData() {
         tracks.classList.add("track-item");
         const song = res2[i].track
         const ListArt = song.artists
-        const ListImg = song.album.images
 
         const number = document.createElement("div")
         number.classList.add("track-number")
@@ -32,8 +31,8 @@ async function fetchData() {
 
         const imageSongs = document.createElement("img")
         imageSongs.classList.add("album-art")
-        const imgTrack = ListImg.map(image => image.url)
-        imageSongs.src = imgTrack[0]
+        imageSongs.src = song.album.images[0].url
+        imageSongs.alt = song.album.images[0].url
 
         const durationSongs = document.createElement("div")
         durationSongs.classList.add("track-meta");
